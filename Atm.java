@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.lang.String;
+import java.time.LocalDateTime;
 
 public class Atm {
     public static int user_num;
@@ -16,13 +17,13 @@ public class Atm {
     public static int pass ;
     public static long id_check;
     public static int mark =-1;
+    public static LocalDateTime time;
 
     public static void main(String args[]) {
         Record();
         if (mark==-1){
             ReadFile();
         }
-
         while (true) {
             Record();
             mainMenu();
@@ -100,11 +101,12 @@ public class Atm {
                                             bb=tr[j];
                                             money[j] += transfer;
                                             money[flag] -= transfer;
-                                            String tran_record = "You_transfer_" + transfer + "_MMK_to_" + user_name[j];
+                                            time = LocalDateTime.now();
+                                            String tran_record = "You_transfer_" + transfer + "_MMK_to_" + user_name[j]+"_at_"+time.withNano(0);
                                             transfer_Record[flag][aa]=tran_record;
                                             aa++;
                                             WriteToFile();
-                                            String receive_record = "You_receive_"+transfer+"_MMK_from_"+user_name[flag];
+                                            String receive_record = "You_receive_"+transfer+"_MMK_from_"+user_name[flag]+"_at_"+time.withNano(0);
                                             transfer_Record[j][bb]=receive_record;
                                             bb++;
                                             tr[j]=bb;
